@@ -8,4 +8,6 @@ public interface IBrandService {
     boolean addBrand(BrandDto brandDto);
 
     List<BrandDto> getBrands(String keyword);
+
+    boolean removeBrand(String brandId);
 }

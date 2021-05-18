@@ -23,4 +23,9 @@ public class BrandServiceImpl implements IBrandService {
     public List<BrandDto> getBrands(String keyword) {
         return brandDao.getBrands(keyword);
     }
+
+    @Override
+    public boolean removeBrand(String brandId) {
+        return brandDao.removeBrand(brandId);
+    }
 }

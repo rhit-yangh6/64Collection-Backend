@@ -36,4 +36,11 @@ public class BrandDao {
             return out;
         }).collect(Collectors.toList());
     }
+
+    public boolean removeBrand(String id) {
+        Query query = new Query();
+        query
+                .addCriteria(Criteria.where("id").is(id));
+        return mongoTemplate.remove(query, BrandEntity.class).getDeletedCount() != 0;
+    }
 }
