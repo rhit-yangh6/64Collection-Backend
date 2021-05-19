@@ -19,4 +19,6 @@ public class TypeDto {
 
     private String brandId;
 
+    private String diecastBrand;
+
 }

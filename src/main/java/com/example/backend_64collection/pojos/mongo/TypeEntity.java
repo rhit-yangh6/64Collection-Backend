@@ -20,4 +20,6 @@ public class TypeEntity {
     private int make;
 
     private String brandId;
+
+    private String diecastBrand;
 }
