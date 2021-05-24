@@ -10,4 +10,6 @@ public interface IBrandService {
     List<BrandDto> getBrands(String keyword);
 
     boolean removeBrand(String brandId);
+
+    BrandDto getSingleBrandInfo(String brandId);
 }

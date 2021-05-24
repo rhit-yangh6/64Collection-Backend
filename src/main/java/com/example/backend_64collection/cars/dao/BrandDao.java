@@ -43,4 +43,17 @@ public class BrandDao {
                 .addCriteria(Criteria.where("id").is(id));
         return mongoTemplate.remove(query, BrandEntity.class).getDeletedCount() != 0;
     }
+
+    public BrandDto getSingleBrandInfo(String brandId) {
+        Query query = new Query();
+        query
+                .addCriteria(Criteria.where("id").is(brandId));
+        BrandEntity brandEntity = mongoTemplate.findOne(query, BrandEntity.class);
+        BrandDto out = new BrandDto();
+        if (brandEntity == null) {
+            return null;
+        }
+        BeanUtils.copyProperties(brandEntity, out);
+        return out;
+    }
 }

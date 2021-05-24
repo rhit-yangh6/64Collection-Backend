@@ -26,6 +26,11 @@ public class BrandController {
         return Result.success(brandService.getBrands(keyword));
     }
 
+    @GetMapping("/info")
+    public Result<?> getBrandInfo(@RequestParam String brandId) {
+        return Result.success(brandService.getSingleBrandInfo(brandId));
+    }
+
     @GetMapping("/delete")
     public Result<?> deleteBrand(@RequestParam String brandId) {
         if (brandService.removeBrand(brandId)) {
