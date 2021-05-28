@@ -27,6 +27,16 @@ public class TypeController {
         return Result.success(typeService.getBrandTypeList(brandId, keyword));
     }
 
+    @GetMapping("/category_list")
+    public Result<?> getCategoryTypeList(@RequestParam String category) {
+        return Result.success(typeService.getCategoryTypeList(category));
+    }
+
+    @GetMapping("/random")
+    public Result<?> getRandomType() {
+        return Result.success(typeService.getRandomType());
+    }
+
     @GetMapping("/delete")
     public Result<?> deleteType(@RequestParam String typeId) {
         if(!typeService.deleteType(typeId)){

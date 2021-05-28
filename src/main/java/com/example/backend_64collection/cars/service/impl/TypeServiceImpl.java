@@ -25,6 +25,16 @@ public class TypeServiceImpl implements ITypeService {
     }
 
     @Override
+    public List<TypeDto> getCategoryTypeList(String category) {
+        return typeDao.getCategoryTypeList(category);
+    }
+
+    @Override
+    public TypeDto getRandomType() {
+        return typeDao.getRandomType();
+    }
+
+    @Override
     public boolean deleteType(String typeId) {
         return typeDao.deleteType(typeId);
     }

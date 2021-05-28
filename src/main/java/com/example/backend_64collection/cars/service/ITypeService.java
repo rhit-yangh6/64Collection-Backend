@@ -10,6 +10,10 @@ public interface ITypeService {
 
     List<TypeDto> getBrandTypeList(String brandId, String keyword);
 
+    List<TypeDto> getCategoryTypeList(String category);
+
+    TypeDto getRandomType();
+
     boolean deleteType(String typeId);
 
 }
