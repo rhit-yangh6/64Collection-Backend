@@ -38,4 +38,9 @@ public class TypeServiceImpl implements ITypeService {
     public boolean deleteType(String typeId) {
         return typeDao.deleteType(typeId);
     }
+
+    @Override
+    public void increaseViewTimes(String typeId) {
+        typeDao.increaseViewTimes(typeId);
+    }
 }

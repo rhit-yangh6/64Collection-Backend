@@ -2,6 +2,7 @@ package com.example.backend_64collection.cars.controller;
 
 import com.example.backend_64collection.cars.dto.BrandDto;
 import com.example.backend_64collection.cars.service.IBrandService;
+import com.example.backend_64collection.cars.service.ITypeService;
 import com.example.backend_64collection.common.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,9 @@ public class BrandController {
 
     @Autowired
     private IBrandService brandService;
+
+    @Autowired
+    private ITypeService typeService;
 
     @PostMapping("/add")
     public Result<?> addBrand(@RequestBody BrandDto brandDto) {
@@ -27,7 +31,9 @@ public class BrandController {
     }
 
     @GetMapping("/info")
-    public Result<?> getBrandInfo(@RequestParam String brandId) {
+    public Result<?> getBrandInfo(@RequestParam String brandId,
+                                  @RequestParam String typeId) {
+        typeService.increaseViewTimes(typeId);
         return Result.success(brandService.getSingleBrandInfo(brandId));
     }
 

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -70,5 +71,15 @@ public class TypeDao {
         query
                 .addCriteria(Criteria.where("id").is(typeId));
         return mongoTemplate.remove(query, TypeEntity.class).getDeletedCount() != 0;
+    }
+
+    public void increaseViewTimes(String typeId) {
+        Query query = new Query();
+        query
+                .addCriteria(Criteria.where("id").is(typeId));
+        Update update = new Update();
+        update
+                .inc("viewTimes");
+        mongoTemplate.findAndModify(query, update, TypeEntity.class);
     }
 }

@@ -16,4 +16,6 @@ public interface ITypeService {
 
     boolean deleteType(String typeId);
 
+    void increaseViewTimes(String typeId);
+
 }

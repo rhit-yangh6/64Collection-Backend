@@ -21,4 +21,6 @@ public class TypeDto {
 
     private String diecastBrand;
 
+    private int viewTimes;
+
 }

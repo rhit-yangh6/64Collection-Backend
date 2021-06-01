@@ -22,4 +22,6 @@ public class TypeEntity {
     private String brandId;
 
     private String diecastBrand;
+
+    private int viewTimes = 0;
 }
