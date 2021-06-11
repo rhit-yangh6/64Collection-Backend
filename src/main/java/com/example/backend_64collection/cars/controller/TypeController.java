@@ -1,8 +1,12 @@
 package com.example.backend_64collection.cars.controller;
 
+import com.example.backend_64collection.cars.dto.BrandDto;
+import com.example.backend_64collection.cars.dto.BrandTypeDto;
 import com.example.backend_64collection.cars.dto.TypeDto;
+import com.example.backend_64collection.cars.service.IBrandService;
 import com.example.backend_64collection.cars.service.ITypeService;
 import com.example.backend_64collection.common.Result;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +16,9 @@ public class TypeController {
 
     @Autowired
     private ITypeService typeService;
+
+    @Autowired
+    private IBrandService brandService;
 
     @PostMapping("/add")
     public Result<?> addType(@RequestBody TypeDto typeDto) {
@@ -35,6 +42,28 @@ public class TypeController {
     @GetMapping("/random")
     public Result<?> getRandomType() {
         return Result.success(typeService.getRandomType());
+    }
+
+    @GetMapping("/info")
+    public Result<?> getTypeInfo(@RequestParam String typeId) {
+
+        TypeDto typeDto = typeService.getSingleType(typeId);
+        if (typeDto == null) {
+            return Result.fail("No such type.");
+        }
+        typeService.increaseViewTimes(typeId);
+
+        BrandDto brandDto = brandService.getSingleBrandInfo(typeDto.getBrandId());
+
+        BrandTypeDto brandTypeDto = new BrandTypeDto();
+        BeanUtils.copyProperties(brandDto, brandTypeDto);
+        BeanUtils.copyProperties(typeDto, brandTypeDto);
+
+        brandTypeDto.setBrandName(brandDto.getName());
+        brandTypeDto.setTypeId(typeDto.getId());
+        brandTypeDto.setTypeName(typeDto.getName());
+
+        return Result.success(brandTypeDto);
     }
 
     @GetMapping("/delete")

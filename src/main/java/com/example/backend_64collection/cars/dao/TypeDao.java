@@ -82,4 +82,17 @@ public class TypeDao {
                 .inc("viewTimes");
         mongoTemplate.findAndModify(query, update, TypeEntity.class);
     }
+
+    public TypeDto getSingleType(String typeId) {
+        Query query = new Query();
+        query
+                .addCriteria(Criteria.where("id").is(typeId));
+        TypeEntity typeEntity = mongoTemplate.findOne(query, TypeEntity.class);
+        if (typeEntity == null) {
+            return null;
+        }
+        TypeDto out = new TypeDto();
+        BeanUtils.copyProperties(typeEntity, out);
+        return out;
+    }
 }

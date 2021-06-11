@@ -18,4 +18,6 @@ public interface ITypeService {
 
     void increaseViewTimes(String typeId);
 
+    TypeDto getSingleType(String typeId);
+
 }

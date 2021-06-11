@@ -43,4 +43,9 @@ public class TypeServiceImpl implements ITypeService {
     public void increaseViewTimes(String typeId) {
         typeDao.increaseViewTimes(typeId);
     }
+
+    @Override
+    public TypeDto getSingleType(String typeId) {
+        return typeDao.getSingleType(typeId);
+    }
 }
