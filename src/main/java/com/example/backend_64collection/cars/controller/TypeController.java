@@ -74,4 +74,9 @@ public class TypeController {
         return Result.success();
     }
 
+    @GetMapping("/featured_list")
+    public Result<?> getFeaturedTypeList(@RequestParam int count) {
+        return Result.success(typeService.getFeaturedTypeList(count));
+    }
+
 }

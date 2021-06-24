@@ -95,4 +95,24 @@ public class TypeDao {
         BeanUtils.copyProperties(typeEntity, out);
         return out;
     }
+
+    public List<TypeDto> getAllTypeList() {
+        return mongoTemplate.find(new Query(), TypeEntity.class).stream().map(in -> {
+            TypeDto out = new TypeDto();
+            BeanUtils.copyProperties(in, out);
+            return out;
+        }).collect(Collectors.toList());
+    }
+
+    public List<TypeDto> getFeaturedTypeList(int count) {
+        Query query = new Query();
+        query
+                .with(Sort.by(Sort.Direction.DESC, "viewTimes"))
+                .limit(count);
+        return mongoTemplate.find(query, TypeEntity.class).stream().map(in -> {
+            TypeDto out = new TypeDto();
+            BeanUtils.copyProperties(in, out);
+            return out;
+        }).collect(Collectors.toList());
+    }
 }
