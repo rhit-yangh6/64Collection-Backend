@@ -33,8 +33,9 @@ public class TypeServiceImpl implements ITypeService {
     }
 
     @Override
-    public List<TypeDto> getCategoryTypeList(String category) {
-        return typeDao.getCategoryTypeList(category);
+    public List<BrandTypeDto> getCategoryTypeList(String category) {
+        List<TypeDto> typeList = typeDao.getCategoryTypeList(category);
+        return getBrandTypeDtosFromTypeList(typeList);
     }
 
     @Override
@@ -45,19 +46,7 @@ public class TypeServiceImpl implements ITypeService {
     @Override
     public List<BrandTypeDto> getFeaturedTypeList(int count) {
         List<TypeDto> typeList = typeDao.getFeaturedTypeList(count);
-        List<BrandTypeDto> brandTypeDtoList = new ArrayList<>();
-        typeList.forEach((t) -> {
-            BrandTypeDto out = new BrandTypeDto();
-            BrandDto brandDto = brandService.getSingleBrandInfo(t.getBrandId());
-            BeanUtils.copyProperties(brandDto, out);
-            BeanUtils.copyProperties(t, out);
-
-            out.setBrandName(brandDto.getName());
-            out.setTypeId(t.getId());
-            out.setTypeName(t.getName());
-            brandTypeDtoList.add(out);
-        });
-        return brandTypeDtoList;
+        return getBrandTypeDtosFromTypeList(typeList);
     }
 
     @Override
@@ -78,5 +67,21 @@ public class TypeServiceImpl implements ITypeService {
     @Override
     public TypeDto getSingleType(String typeId) {
         return typeDao.getSingleType(typeId);
+    }
+
+    private List<BrandTypeDto> getBrandTypeDtosFromTypeList(List<TypeDto> typeList) {
+        List<BrandTypeDto> brandTypeDtoList = new ArrayList<>();
+        typeList.forEach((t) -> {
+            BrandTypeDto out = new BrandTypeDto();
+            BrandDto brandDto = brandService.getSingleBrandInfo(t.getBrandId());
+            BeanUtils.copyProperties(brandDto, out);
+            BeanUtils.copyProperties(t, out);
+
+            out.setBrandName(brandDto.getName());
+            out.setTypeId(t.getId());
+            out.setTypeName(t.getName());
+            brandTypeDtoList.add(out);
+        });
+        return brandTypeDtoList;
     }
 }

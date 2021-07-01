@@ -11,7 +11,7 @@ public interface ITypeService {
 
     List<TypeDto> getBrandTypeList(String brandId, String keyword);
 
-    List<TypeDto> getCategoryTypeList(String category);
+    List<BrandTypeDto> getCategoryTypeList(String category);
 
     List<TypeDto> getAllTypeList();
 
