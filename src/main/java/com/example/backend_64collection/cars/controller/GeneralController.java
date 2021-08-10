@@ -18,4 +18,9 @@ public class GeneralController {
     public Result<?> getGeneralInfo() {
         return Result.success(generalService.getGeneralInfo());
     }
+
+    @GetMapping("/stats")
+    public Result<?> getStatistics() {
+        return Result.success(generalService.getStatistics());
+    }
 }
