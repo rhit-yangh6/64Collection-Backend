@@ -28,4 +28,6 @@ public class BrandTypeDto {
 
     private int viewTimes;
 
+    private String coverImgUrl;
+
 }

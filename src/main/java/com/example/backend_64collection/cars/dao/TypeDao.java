@@ -31,7 +31,7 @@ public class TypeDao {
     public List<TypeDto> getBrandTypeList(String brandId, String keyword) {
         Query query = new Query();
         query
-                .addCriteria(Criteria.where("name").regex(".*" + keyword + ".*", "i"))
+                .addCriteria(Criteria.where("name").regex(keyword, "i"))
                 .addCriteria(Criteria.where("brandId").is(brandId))
                 .with(Sort.by(Sort.Direction.ASC, "name"));
         return mongoTemplate.find(query, TypeEntity.class).stream().map(in -> {

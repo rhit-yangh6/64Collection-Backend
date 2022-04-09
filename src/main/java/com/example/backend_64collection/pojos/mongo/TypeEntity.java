@@ -24,4 +24,6 @@ public class TypeEntity {
     private String diecastBrand;
 
     private int viewTimes = 0;
+
+    private String coverImgUrl;
 }

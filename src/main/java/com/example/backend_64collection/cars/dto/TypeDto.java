@@ -23,4 +23,6 @@ public class TypeDto {
 
     private int viewTimes;
 
+    private String coverImgUrl;
+
 }
